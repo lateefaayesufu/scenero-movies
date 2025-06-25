@@ -87,15 +87,15 @@ function App() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search..."
-                className={`w-64 p-2 pl-10 rounded-md shadow-md border focus:outline-none focus:ring-2 ${
+                className={`w-full max-w-[200px] md:max-w-xs px-3 py-1 text-sm p-2 pl-10 rounded-md shadow-md border focus:outline-none focus:ring-2 ${
                   darkMode
                     ? "bg-gray-800 border-purple-500 text-white"
                     : "bg-gray-100 border-purple-400"
                 }`}
               />
               <Search
-                className="absolute top-2.5 left-3 text-gray-400"
-                size={22}
+                className="absolute top-2 left-4 text-gray-400"
+                size={16}
               />
             </div>
           </div>
