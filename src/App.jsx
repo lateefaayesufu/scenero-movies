@@ -302,7 +302,7 @@ function App() {
           <p className="text-sm md:text-base">
             &copy; 2025 Scenero<sup>TM</sup>
           </p>
-          <p className=" text-[18px] text-purple-400">
+          <p className=" text-[17px] text-purple-400">
             Lights fade, stories stay. Find your next obsession.
           </p>
         </footer>
