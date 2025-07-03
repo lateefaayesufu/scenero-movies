@@ -14,8 +14,30 @@ function App() {
     const saved = localStorage.getItem("watchlist");
     return saved ? JSON.parse(saved) : [];
   });
+  const [upcoming, setUpcoming] = useState([]);
+  const [popular, setPopular] = useState([]);
+  const [topRated, setTopRated] = useState([]);
 
   const API_KEY = import.meta.env.VITE_OMDB_API_KEY;
+  const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+
+  useEffect(() => {
+    async function fetchMovies(type, setter) {
+      try {
+        const res = await fetch(
+          `https://api.themoviedb.org/3/movie/${type}?api_key=${TMDB_API_KEY}`
+        );
+        const data = await res.json();
+        setter(data.results);
+      } catch (err) {
+        console.error(`Error fetching ${type}:`, err);
+      }
+    }
+
+    fetchMovies("upcoming", setUpcoming);
+    fetchMovies("popular", setPopular);
+    fetchMovies("top_rated", setTopRated);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => setDebouncedQuery(query.trim()), 500);
@@ -61,6 +83,28 @@ function App() {
     setWatchlist(updated);
     localStorage.setItem("watchlist", JSON.stringify(updated));
   };
+  const renderRow = (movies, title) => (
+    <section className="mb-10 px-4 mt-15">
+      <h2 className="text-3xl sm:text-4xl font-black text-purple-400 mb-6 uppercase drop-shadow-md text-center">
+        {title}
+      </h2>
+
+      <div className="flex overflow-x-auto gap-4 pb-2">
+        {movies.map((movie) => (
+          <div
+            key={movie.id}
+            className="min-w-[120px] sm:min-w-[160px] rounded-lg overflow-hidden shadow-md bg-gray-900"
+          >
+            <img
+              src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+              alt={movie.title}
+              className="w-full h-auto object-cover"
+            />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 
   return (
     <div
@@ -74,12 +118,12 @@ function App() {
             <VideoIcon size={32} strokeWidth={2.5} className="mt-1.5" />
             Scenero
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
             <button
               onClick={() => setDarkMode(!darkMode)}
               className="text-purple-300"
             >
-              {darkMode ? <Sun size={28} /> : <Moon size={28} />}
+              {darkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
             <div className="relative">
               <input
@@ -197,6 +241,10 @@ function App() {
           ))}
         </section>
 
+        {renderRow(upcoming, "UPCOMING MOVIES")}
+        {renderRow(popular, "POPULAR MOVIES")}
+        {renderRow(topRated, "TOP RATED MOVIES")}
+
         {showModal && selectedMovie && (
           <div className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm z-50 flex items-center justify-center px-6 py-10">
             <div className="relative w-full max-w-4xl bg-gray-900 text-white rounded-xl overflow-hidden shadow-2xl flex flex-col md:flex-row">
@@ -248,6 +296,16 @@ function App() {
             </div>
           </div>
         )}
+
+        {/* Footer starts here */}
+        <footer className="bg-gradient-to-r from-purple-900 via-black to-purple-800 text-gray-300 text-center py-6 px-4 mt-12">
+          <p className="text-sm md:text-base">
+            &copy; 2025 Scenero<sup>TM</sup>
+          </p>
+          <p className=" text-[18px] text-purple-400">
+            Lights fade, stories stay. Find your next obsession.
+          </p>
+        </footer>
       </div>
     </div>
   );
