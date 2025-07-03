@@ -297,14 +297,30 @@ function App() {
           </div>
         )}
 
-        {/* Footer starts here */}
-        <footer className="bg-gradient-to-r from-purple-900 via-black to-purple-800 text-gray-300 text-center py-6 px-4 mt-12">
-          <p className="text-sm md:text-base">
-            &copy; 2025 Scenero<sup>TM</sup>
-          </p>
-          <p className=" text-[17px] text-purple-400">
-            Lights fade, stories stay. Find your next obsession.
-          </p>
+        <footer className="bg-gradient-to-r from-purple-950 via-black to-purple-900 text-gray-300 py-8 px-6 mt-20 shadow-inner">
+          <div className="max-w-5xl mx-auto text-center space-y-2">
+            <p className="text-lg font-semibold tracking-wide text-purple-300">
+              &copy; 2025 <span className="text-white font-bold">Scenero</span>
+              <sup className="text-xs">™</sup>
+            </p>
+            <p className="text-sm md:text-base text-gray-400 italic">
+              Lights fade, stories stay. Find your next obsession.
+            </p>
+            <div className="flex justify-center gap-6 pt-4 text-purple-500 text-sm">
+              <a href="#" className="hover:text-purple-300 transition">
+                About
+              </a>
+              <a href="#" className="hover:text-purple-300 transition">
+                Privacy
+              </a>
+              <a
+                href="https://github.com/lateefaayesufu"
+                className="hover:text-purple-300 transition"
+              >
+                GitHub
+              </a>
+            </div>
+          </div>
         </footer>
       </div>
     </div>
