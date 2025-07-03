@@ -139,7 +139,7 @@ function App() {
               />
               <Search
                 className="absolute top-2 left-4 text-gray-400"
-                size={16}
+                size={15}
               />
             </div>
           </div>
@@ -178,7 +178,7 @@ function App() {
           <div className="flex flex-col items-center justify-center my-12 gap-4">
             <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
             <p className="text-purple-300 text-lg italic animate-pulse">
-              Lights, camera... fetching your movies🎬
+              Lights, camera... fetching your movies
             </p>
           </div>
         )}
